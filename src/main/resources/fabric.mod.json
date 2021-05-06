@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "simplechat",
+  "version": "${version}",
+  "name": "SimpleChat",
+  "description": "",
+  "authors": [
+    "vetustus"
+  ],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/simplechat/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "me.vetustus.server.simplechat.SimpleChat"
+    ]
+  },
+  "mixins": [
+    "simplechat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.16.5"
+  }
+}

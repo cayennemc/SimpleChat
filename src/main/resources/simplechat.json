@@ -1,0 +1,7 @@
+{
+  "enable_global_chat": false,
+  "enable_chat_colors": false,
+  "local_chat_format": "%player% > &7%message%",
+  "global_chat_format": "&8[&bG&8] &r%player% > &e%message%",
+  "chat_range": 100
+}
