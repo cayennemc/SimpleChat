@@ -25,7 +25,7 @@ public abstract class MixinServerPlayNetworkHandler implements ServerPlayPacketL
     protected abstract void filterText(String text, Consumer<String> consumer);
 
     /**
-     * @author ?
+     * @author vetustus
      */
     @Overwrite
     public void onGameMessage(ChatMessageC2SPacket packet) {
