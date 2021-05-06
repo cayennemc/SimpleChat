@@ -6,6 +6,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
 import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
 
@@ -49,7 +50,7 @@ public class SimpleChat implements ModInitializer {
             if (config.isChatColorsEnabled())
                 stringMessage = translateChatColors('&', stringMessage);
 
-            Text resultMessage = Text.of(stringMessage);
+            Text resultMessage = literal(stringMessage);
 
             List<ServerPlayerEntity> players = player.getServer().getPlayerManager().getPlayerList();
             for (ServerPlayerEntity p : players) {
@@ -73,13 +74,13 @@ public class SimpleChat implements ModInitializer {
                 if (context.getSource().hasPermissionLevel(1)) {
                     try {
                         loadConfig();
-                        context.getSource().sendFeedback(Text.of("Settings are reloaded!"), false);
+                        context.getSource().sendFeedback(literal("Settings are reloaded!"), false);
                     } catch (IOException e) {
-                        context.getSource().sendFeedback(Text.of("An error occurred while reloading the settings (see the console)!"), false);
+                        context.getSource().sendFeedback(literal("An error occurred while reloading the settings (see the console)!"), false);
                         e.printStackTrace();
                     }
                 } else {
-                    context.getSource().sendFeedback(Text.of("You don't have the right to do this! If you think this is an error, contact your server administrator.")
+                    context.getSource().sendFeedback(literal("You don't have the right to do this! If you think this is an error, contact your server administrator.")
                             .copy().formatted(Formatting.RED), false);
                 }
                 return 1;
@@ -112,5 +113,9 @@ public class SimpleChat implements ModInitializer {
             }
         }
         return new String(chars);
+    }
+
+    private Text literal(String text) {
+        return new LiteralText(text);
     }
 }
