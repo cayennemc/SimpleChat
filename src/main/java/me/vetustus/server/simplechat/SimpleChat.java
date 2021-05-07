@@ -16,6 +16,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.List;
+import java.util.Objects;
+
+import static me.vetustus.server.simplechat.ChatColor.translateChatColors;
 
 public class SimpleChat implements ModInitializer {
     private ChatConfig config;
@@ -52,7 +55,8 @@ public class SimpleChat implements ModInitializer {
 
             Text resultMessage = literal(stringMessage);
 
-            List<ServerPlayerEntity> players = player.getServer().getPlayerManager().getPlayerList();
+            List<ServerPlayerEntity> players = Objects.requireNonNull(player.getServer(), "The server cannot be null.")
+                    .getPlayerManager().getPlayerList();
             for (ServerPlayerEntity p : players) {
                 if (config.isGlobalChatEnabled()) {
                     if (isGlobalMessage) {
@@ -69,29 +73,30 @@ public class SimpleChat implements ModInitializer {
             return chatMessage;
         });
 
-        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) -> {
-            dispatcher.register(CommandManager.literal("simplechat").executes(context -> {
-                if (context.getSource().hasPermissionLevel(1)) {
-                    try {
-                        loadConfig();
-                        context.getSource().sendFeedback(literal("Settings are reloaded!"), false);
-                    } catch (IOException e) {
-                        context.getSource().sendFeedback(literal("An error occurred while reloading the settings (see the console)!"), false);
-                        e.printStackTrace();
+        CommandRegistrationCallback.EVENT.register((dispatcher, dedicated) ->
+                dispatcher.register(CommandManager.literal("simplechat").executes(context -> {
+                    if (context.getSource().hasPermissionLevel(1)) {
+                        try {
+                            loadConfig();
+                            context.getSource().sendFeedback(literal("Settings are reloaded!"), false);
+                        } catch (IOException e) {
+                            context.getSource().sendFeedback(literal("An error occurred while reloading the settings (see the console)!"), false);
+                            e.printStackTrace();
+                        }
+                    } else {
+                        context.getSource().sendFeedback(literal("You don't have the right to do this! If you think this is an error, contact your server administrator.")
+                                .copy().formatted(Formatting.RED), false);
                     }
-                } else {
-                    context.getSource().sendFeedback(literal("You don't have the right to do this! If you think this is an error, contact your server administrator.")
-                            .copy().formatted(Formatting.RED), false);
-                }
-                return 1;
-            }));
-        });
+                    return 1;
+                })));
     }
 
     private void loadConfig() throws IOException {
         File configFile = new File(ChatConfig.CONFIG_PATH);
         if (!configFile.exists()) {
-            Files.copy(this.getClass().getClassLoader().getResourceAsStream("simplechat.json"), configFile.toPath());
+            Files.copy(Objects.requireNonNull(
+                    this.getClass().getClassLoader().getResourceAsStream("simplechat.json"),
+                    "Couldn't find the configuration file in the JAR"), configFile.toPath());
         }
         try {
             config = new Gson().fromJson(new FileReader(ChatConfig.CONFIG_PATH), ChatConfig.class);
@@ -99,20 +104,6 @@ public class SimpleChat implements ModInitializer {
             config = new ChatConfig();
             e.printStackTrace();
         }
-    }
-
-    // almost like in bukkit
-    public static String translateChatColors(char chatCode, String message) {
-        if (message == null)
-            return "";
-        char[] chars = message.toCharArray();
-        for (int i = 0; i < chars.length - 1; i++) {
-            if (chars[i] == chatCode && "AaBbCcDdEeFfKkLlMmNnOoRrXx0123456789".indexOf(chars[i + 1]) > -1) {
-                chars[i] = '\u00a7';          // paragraph symbol
-                chars[i + 1] = Character.toLowerCase(chars[i + 1]);
-            }
-        }
-        return new String(chars);
     }
 
     private Text literal(String text) {
