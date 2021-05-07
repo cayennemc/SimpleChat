@@ -35,6 +35,14 @@ public class SimpleChat implements ModInitializer {
         PlayerChatCallback.EVENT.register((player, message) -> {
             PlayerChatCallback.ChatMessage chatMessage = new PlayerChatCallback.ChatMessage(player, message);
 
+            /*
+             * If someone wants to use the mod as a library,
+             * they must disable the "enable_chat_mod" parameter,
+             * then the chat will not be handled by the mod.
+             */
+            if (!config.isChatModEnabled())
+                return chatMessage;
+
             chatMessage.setCancelled(true);
 
             boolean isGlobalMessage = false;

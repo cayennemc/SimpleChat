@@ -5,6 +5,8 @@ import com.google.gson.annotations.SerializedName;
 public class ChatConfig {
     public static final String CONFIG_PATH = "config/simplechat.json";
 
+    @SerializedName("enable_chat_mod")
+    private final boolean isChatModEnabled;
     @SerializedName("enable_global_chat")
     private final boolean isGlobalChatEnabled;
     @SerializedName("enable_chat_colors")
@@ -17,11 +19,16 @@ public class ChatConfig {
     private final int chatRange;
 
     public ChatConfig() {
+        isChatModEnabled = true;
         isGlobalChatEnabled = false;
         isChatColorsEnabled = false;
         localChatFormat = "%player% > &7%message%";
         globalChatFormat = "%player% > &e%message";
         chatRange = 100;
+    }
+
+    public boolean isChatModEnabled() {
+        return isChatModEnabled;
     }
 
     public boolean isGlobalChatEnabled() {
