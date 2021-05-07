@@ -14,6 +14,7 @@ Works even in a single player game.
 The configuration is located in `<game or server directory>/config/simplechat.json`.
 | Name | Description | Type |
 |-|-|-|
+| enable_chat_mod | Enables (true) or disables (false) chat handling by the mod. | boolean |
 | enable_global_chat | Enables (true) or disables (false) the global chat. | boolean |
 | enable_chat_colors | Enables (true) or disables (false) the use of color codes in the chat. | boolean |
 | local_chat_format | Defines the appearance of the local chat. | String |
@@ -22,6 +23,7 @@ The configuration is located in `<game or server directory>/config/simplechat.js
 
 ```json
 {
+  "enable_chat_mod": true,
   "enable_global_chat": false,
   "enable_chat_colors": false,
   "local_chat_format": "%player% > &7%message%",
