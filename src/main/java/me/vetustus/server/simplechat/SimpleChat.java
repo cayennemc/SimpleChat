@@ -46,7 +46,7 @@ public class SimpleChat implements ModInitializer {
             chatFormat = translateChatColors('&', chatFormat);
             String stringMessage = chatFormat
                     .replaceAll("%player%", player.getDisplayName().asString())
-            .replaceAll("%message%", message);
+                    .replaceAll("%message%", message);
             if (config.isChatColorsEnabled())
                 stringMessage = translateChatColors('&', stringMessage);
 

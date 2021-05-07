@@ -56,6 +56,7 @@ public interface PlayerChatCallback {
 
         /**
          * Get the player who sent the message.
+         *
          * @return the sender of the message
          */
         public ServerPlayerEntity getPlayer() {
@@ -63,8 +64,19 @@ public interface PlayerChatCallback {
         }
 
         /**
+         * Get the message text.
+         * It should be understood that the method will return a new text if the message is changed via setMessage.
+         *
+         * @return the message text to send
+         */
+        public String getMessage() {
+            return this.message;
+        }
+
+        /**
          * Set a new message text.
          * If the new text is <i>null</i>, the message text will be set as an empty string ("").
+         *
          * @param message new message
          */
         public void setMessage(String message) {
@@ -74,29 +86,22 @@ public interface PlayerChatCallback {
         }
 
         /**
-         * Get the message text.
-         * It should be understood that the method will return a new text if the message is changed via setMessage.
-         * @return the message text to send
+         * Whether the message was canceled.
+         *
+         * @return true if the event is canceled and the message is not sent, otherwise false
          */
-        public String getMessage() {
-            return this.message;
+        public boolean isCancelled() {
+            return this.isCancelled;
         }
 
         /**
          * Whether to cancel sending the message.
          * If you cancel, the message will simply not be sent to the players.
+         *
          * @param isCancelled true or false
          */
         public void setCancelled(boolean isCancelled) {
             this.isCancelled = isCancelled;
-        }
-
-        /**
-         * Whether the message was canceled.
-         * @return true if the event is canceled and the message is not sent, otherwise false
-         */
-        public boolean isCancelled() {
-            return this.isCancelled;
         }
     }
 }

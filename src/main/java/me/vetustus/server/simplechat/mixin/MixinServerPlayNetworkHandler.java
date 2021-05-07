@@ -16,7 +16,8 @@ import java.util.function.Consumer;
 @Mixin(ServerPlayNetworkHandler.class)
 public abstract class MixinServerPlayNetworkHandler implements ServerPlayPacketListener {
 
-    @Shadow public ServerPlayerEntity player;
+    @Shadow
+    public ServerPlayerEntity player;
 
     @Shadow
     protected abstract void method_31286(String message);
