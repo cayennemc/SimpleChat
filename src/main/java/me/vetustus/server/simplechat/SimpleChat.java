@@ -9,6 +9,8 @@ import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -22,6 +24,7 @@ import static me.vetustus.server.simplechat.ChatColor.translateChatColors;
 
 public class SimpleChat implements ModInitializer {
     private ChatConfig config;
+    private static final Logger LOGGER = LogManager.getLogger();
 
     @Override
     public void onInitialize() {
@@ -78,6 +81,7 @@ public class SimpleChat implements ModInitializer {
                     p.sendMessage(resultMessage, false);
                 }
             }
+            LOGGER.info(stringMessage);
             return chatMessage;
         });
 
