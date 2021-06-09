@@ -3,11 +3,14 @@
   "id": "simplechat",
   "version": "${version}",
   "name": "SimpleChat",
-  "description": "",
+  "description": "A simple mod for setting up a chat on your server",
   "authors": [
     "vetustus"
   ],
-  "contact": {},
+  "contact": {
+    "issues": "https://github.com/vetustus/SimpleChat/issues",
+    "sources": "https://github.com/vetustus/SimpleChat"
+  },
   "license": "MIT",
   "icon": "assets/simplechat/icon.png",
   "environment": "*",
