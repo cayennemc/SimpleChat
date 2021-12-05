@@ -1,17 +1,6 @@
 package me.vetustus.server.simplechat;
 
-import com.google.gson.Gson;
-import me.vetustus.server.simplechat.api.event.PlayerChatCallback;
-import net.fabricmc.api.ModInitializer;
-import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
-import net.minecraft.server.command.CommandManager;
-import net.minecraft.server.filter.TextStream;
-import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.text.LiteralText;
-import net.minecraft.text.Text;
-import net.minecraft.util.Formatting;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import static me.vetustus.server.simplechat.ChatColor.translateChatColors;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -21,7 +10,19 @@ import java.nio.file.Files;
 import java.util.List;
 import java.util.Objects;
 
-import static me.vetustus.server.simplechat.ChatColor.translateChatColors;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.google.gson.Gson;
+
+import me.vetustus.server.simplechat.api.event.PlayerChatCallback;
+import net.fabricmc.api.ModInitializer;
+import net.fabricmc.fabric.api.command.v1.CommandRegistrationCallback;
+import net.minecraft.server.command.CommandManager;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.Text;
+import net.minecraft.util.Formatting;
 
 public class SimpleChat implements ModInitializer {
     private ChatConfig config;

@@ -5,7 +5,7 @@
   "name": "SimpleChat",
   "description": "A simple mod for setting up a chat on your server",
   "authors": [
-    "vetustus"
+    "vetustus, AzureDoom"
   ],
   "contact": {
     "issues": "https://github.com/vetustus/SimpleChat/issues",
@@ -23,8 +23,8 @@
     "simplechat.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.11.3",
+    "fabricloader": ">=0.12.5",
     "fabric": "*",
-    "minecraft": "1.17"
+    "minecraft": "1.18"
   }
 }

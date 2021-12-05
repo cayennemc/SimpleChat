@@ -37,7 +37,7 @@ public abstract class MixinServerPlayNetworkHandler implements ServerPlayPacketL
      * @reason
      */
     @Overwrite
-    public void onGameMessage(ChatMessageC2SPacket packet) {
+    public void onChatMessage(ChatMessageC2SPacket packet) {
         String string = StringUtils.normalizeSpace(packet.getChatMessage());
 
         for(int i = 0; i < string.length(); ++i) {
@@ -48,7 +48,7 @@ public abstract class MixinServerPlayNetworkHandler implements ServerPlayPacketL
         }
 
         if (string.startsWith("/")) {
-            NetworkThreadUtils.forceMainThread(packet, this, this.player.getServerWorld());
+            NetworkThreadUtils.forceMainThread(packet, this, this.player.getWorld());
             this.handleMessage(TextStream.Message.permitted(string));
         } else {
             PlayerChatCallback.ChatMessage message = PlayerChatCallback.EVENT.invoker().result(player, packet.getChatMessage());

@@ -4,6 +4,7 @@
 *.iml
 *.ipr
 *.iws
+bin
 
 # IntelliJ
 out/
@@ -116,3 +117,11 @@ run/
 
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
+update_mappings.bat
+SimpleChat_server.launch
+SimpleChat_client.launch
+.settings/org.eclipse.jdt.core.prefs
+.settings/org.eclipse.buildship.core.prefs
+.project
+.classpath
+bin/main/assets/simplechat/icon.png
