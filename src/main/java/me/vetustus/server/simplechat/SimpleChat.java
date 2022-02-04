@@ -33,6 +33,7 @@ public class SimpleChat implements ModInitializer {
 
         try {
             loadConfig();
+	    LOGGER.info("The config is saved!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,6 +108,9 @@ public class SimpleChat implements ModInitializer {
 
     private void loadConfig() throws IOException {
         File configFile = new File(ChatConfig.CONFIG_PATH);
+	File configFolder = new File("config/");
+	if (!configFolder.exists())
+		configFolder.mkdirs();
         if (!configFile.exists()) {
             Files.copy(Objects.requireNonNull(
                     this.getClass().getClassLoader().getResourceAsStream("simplechat.json"),
