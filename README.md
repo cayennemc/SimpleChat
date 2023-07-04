@@ -5,6 +5,8 @@
 
 _A simple chat mod for your server._
 
+❗**The current supported version of the mod is:** https://modrinth.com/mod/simplechatfork❗
+
 Works even in a single player game.
 
 ![Imgur](https://i.imgur.com/orpafbR.jpg)
